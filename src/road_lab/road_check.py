@@ -669,6 +669,10 @@ def lint(images: list[Image]) -> list[Finding]:
             _, probs = _shape_problems(s)
             if probs:
                 warn(img, "QC1-12", "minor", s.ref, ", ".join(probs))
+            if s.kind in {"polyline", "polygon"}:
+                dup = sum(1 for a, b in zip(s.points, s.points[1:]) if a == b)
+                if dup:
+                    warn(img, "QC1-12", "minor", s.ref, f"{dup} điểm lặp liền nhau (click hai lần?): xoá điểm thừa")
         for t in img.tags:
             for p in _tag_problems(t):
                 warn(img, "QC1-12", "minor", f"tag:{t.label}", p)

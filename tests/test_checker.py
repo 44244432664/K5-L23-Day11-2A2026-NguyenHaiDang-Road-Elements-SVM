@@ -75,6 +75,14 @@ def test_lint_flags_far_to_near_and_missing_tag():
     assert "QC1-04" in codes
 
 
+def test_lint_warns_repeated_point():
+    im = synthetic_gt()[0].copy()
+    lane = next(s for s in im.shapes if s.label == "lane")
+    lane.points = [lane.points[0]] + lane.points
+    hits = [f for f in rc.lint([im]) if "điểm lặp" in f.message]
+    assert len(hits) == 1 and hits[0].severity == "minor" and hits[0].ref == lane.ref
+
+
 def test_lint_clean_on_gt():
     assert [f for f in rc.lint(synthetic_gt()) if f.severity != "minor"] == []
 
