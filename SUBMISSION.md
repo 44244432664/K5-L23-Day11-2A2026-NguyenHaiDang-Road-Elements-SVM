@@ -11,7 +11,7 @@ Nộp đúng 5 file lên kênh nộp bài coach chỉ định. Không gửi file
 Trước khi nộp:
 
 - [ ] Mọi job ở trạng thái **completed**.
-- [ ] Đã mở lại hai file zip và chạy `PYTHONPATH=src python3 -m road_lab.road_check lint <tên>-front.zip <tên>-fisheye.zip`; không còn dòng nào mức nặng.
+- [ ] Đã mở lại hai file zip và chạy `PYTHONPATH=src python3 -m road_lab.road_check lint <tên>-front.zip <tên>-fisheye.zip`; không còn dòng nào mức nặng. Nếu còn QC1-02 "chưa có L1/R1" ở ảnh thật sự không thấy vạch: đừng vẽ thêm vạch, gọi coach xác nhận và ghi mã ảnh vào phiếu.
 - [ ] Đã tạo manifest: thêm `--manifest <tên>-manifest.json --name <tên> --revision 1` vào lệnh trên; trong file, `contains_images` là `false`.
 - [ ] Mọi ảnh có đủ bốn tag, tag camera đúng.
 - [ ] Báo cáo có ảnh chụp màn hình và bảng kiểm file (mục 1).

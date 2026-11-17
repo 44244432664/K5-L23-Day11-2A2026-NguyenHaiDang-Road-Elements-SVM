@@ -20,7 +20,7 @@
 - Tên label, thuộc tính và giá trị đúng như Road v1.0 (bảng ở guideline mục 1). Label lạ là lỗi QC1-12.
 - Tên ảnh giữ nguyên như khi coach tạo task; đổi tên làm ảnh rơi khỏi lô bắt buộc.
 - Mỗi ảnh có đủ bốn tag. Mọi job ở trạng thái completed trước khi export.
-- File phải mở lại được bằng `road_check lint`; không còn cảnh báo mức nặng.
+- File phải mở lại được bằng `road_check lint`; không còn cảnh báo mức nặng. Ngoại lệ duy nhất: QC1-02 (thiếu L1/R1) ở ảnh mà coach đã nhìn và xác nhận không thấy vạch thì được miễn; ghi mã ảnh và lý do vào phiếu QC 1, vì lint không có GT nên không biết vạch có thấy được hay không. Manifest vẫn đếm cảnh báo này trong `lint.nặng`.
 
 ## 3. Manifest bàn giao
 

@@ -8,7 +8,8 @@
 - tag camera = front, đặt trước tiên;
 - polyline vẽ từ gần ra xa;
 - vạch đứt là một polyline;
-- R1/L1 nằm trên tâm vạch.
+- R1/L1 nằm trên tâm vạch;
+- thuộc tính đã được sửa: CVAT tự điền giá trị đầu danh sách (polyline mới mang `L1 / solid / white / single`, tag `weather` mang `clear`). Vẽ xong mở Details sửa thuộc tính; đặt tag xong kiểm lại giá trị.
 
 Gặp lỗi ở đây thì sửa ngay, đừng để lặp ra 11 ảnh sau.
 
@@ -20,6 +21,6 @@ Gặp lỗi ở đây thì sửa ngay, đừng để lặp ra 11 ảnh sau.
 
 **Task 3 — Phiếu QC 1.** Đủ 12 mã, mỗi mã có số mục đã kiểm. Mỗi lỗi ghi mã, ảnh, nhãn và mức. Tỉ lệ lỗi chính chia cho số nhãn đã kiểm, không chia cho số ảnh. Quyết định theo luật: còn lỗi nặng → Rework; tỉ lệ lỗi chính > 5 % → Rework; Hold chỉ khi còn ca mơ hồ mà lead chưa trả lời.
 
-**Export.** Format là CVAT for images 1.1, không phải COCO. `road_check lint` không còn lỗi nặng. Tên file là `<tên>-front.zip` và `<tên>-fisheye.zip`. Job ở trạng thái completed. Đã tạo `<tên>-manifest.json` bằng `lint --manifest`, `contains_images` là `false`.
+**Export.** Format là CVAT for images 1.1, không phải COCO. `road_check lint` không còn lỗi nặng; riêng QC1-02 (thiếu L1/R1) ở ảnh mà coach đã nhìn và xác nhận không thấy vạch thì được miễn; ghi mã ảnh và lý do vào phiếu QC 1. Tên file là `<tên>-front.zip` và `<tên>-fisheye.zip`. Job ở trạng thái completed. Đã tạo `<tên>-manifest.json` bằng `lint --manifest`, `contains_images` là `false`.
 
 **Buffer.** Học viên sửa theo phiếu nhận được rồi export lại. Hoạt động row-anchor là tùy chọn, không chấm điểm.
