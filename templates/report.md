@@ -1,6 +1,8 @@
 # Báo cáo cá nhân — Ngày 11
 Họ tên:               Mã học viên:  
 Phiên bản CVAT (Help → About):  
+Guideline: Road v1.0    Lần nộp (`revision` trong manifest):  
+Thời điểm export (ngày giờ trên CVAT):    Số lần nộp lại sau Rework:  
 
 ## 1. Kiểm project
 | Mục | Đúng như guideline Road v1.0? | Ghi chú |

@@ -114,3 +114,41 @@ def test_duplicate_slot_grades_labelled_copy_and_warns():
     assert [f.image for f in res.findings if f.code == "QC1-12"] == [slot]
     assert any(f.image == slot and "2 lần" in f.message for f in rc.lint(sub))
     assert len(rc.label_counts(sub)) == len(sub)
+
+
+def test_lint_writes_delivery_manifest(tmp_path, capsys):
+    import json
+    import zipfile
+
+    from road_lab.cvat_xml import write
+    gt = synthetic_gt()
+    z = tmp_path / "an-front.zip"
+    write(gt, z)
+    m = tmp_path / "an-manifest.json"
+    assert rc.main(["lint", str(z), "--manifest", str(m), "--name", "an", "--revision", "2"]) == 0
+    d = json.loads(m.read_text(encoding="utf-8"))
+    assert d["format"] == "CVAT for images 1.1" and d["guideline"] == rc.GUIDELINE_VERSION
+    assert d["name"] == "an" and d["revision"] == 2
+    f = d["files"][0]
+    assert f["file"] == "an-front.zip" and len(f["sha256"]) == 64 and f["contains_images"] is False
+    assert f["images"] == len(gt) and f["images_all_tags"] == len(gt) and f["images_unlabelled"] == 0
+    assert set(d["lint"]) == {"nặng", "chính", "nhẹ"} and d["lint"]["nặng"] == 0
+    with zipfile.ZipFile(z, "a") as zf:
+        zf.writestr("images/A01.jpg", b"x")
+    assert rc.main(["lint", str(z), "--manifest", str(m)]) == 0
+    assert json.loads(m.read_text(encoding="utf-8"))["files"][0]["contains_images"] is True
+    assert "kèm ảnh" in capsys.readouterr().out
+
+
+def test_lint_manifest_refuses_bad_inputs_and_destination(tmp_path):
+    from road_lab.cvat_xml import write
+    z = tmp_path / "an-front.zip"
+    write(synthetic_gt(), z)
+    before = z.read_bytes()
+    # destination equal to an input must not overwrite the label file
+    assert rc.main(["lint", str(z), "--manifest", str(z)]) == 2
+    assert z.read_bytes() == before
+    # an unopenable input yields no manifest and no crash
+    m = tmp_path / "an-manifest.json"
+    assert rc.main(["lint", str(z), str(tmp_path / "missing.zip"), "--manifest", str(m)]) == 1
+    assert not m.exists()

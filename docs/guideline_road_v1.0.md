@@ -4,6 +4,20 @@
 
 Đọc ở đâu: bài giảng sáng, slide 28–42 (làn, vùng lái, đèn, biển) và slide 55–58 (fisheye); phần này; slide 9–10 của deck thực hành. Ngày 20 mở rộng thành phiên bản 1.x (ô đỗ, ca mưa, đêm); mã và nghĩa các quy tắc dưới đây không đổi. Bản máy đọc cho script: [`lab/AGENTS.md`](../lab/AGENTS.md).
 
+## Thẻ đặc tả
+
+| Mục | Nội dung |
+| --- | --- |
+| Phiên bản | Road v1.0 (mã quy tắc QC1-01 đến QC1-12) |
+| Phạm vi | Ảnh camera trước (front) và bốn camera fisheye; sáu label và bốn tag ở mục 1. Tag ghi được đêm, mưa, sương, nhưng quy tắc vẽ là một bộ cho mọi điều kiện |
+| Ngoài phạm vi | Ô đỗ và quy tắc riêng cho ca mưa, đêm (Road v1.x, Ngày 20); xe, người đi bộ, vật cản; ảnh fisheye đã nắn |
+| Người giữ guideline | Lab Coach Ngày 11; câu hỏi chưa có trong guideline ghi vào bảng ca khó và hỏi lead |
+| Đầu ra | CVAT for images 1.1 kèm manifest bàn giao, xem [đặc tả bàn giao](delivery_road_v1.0.md) |
+| Kiểm chất lượng | Phiếu QC 1 với thang nặng / chính / nhẹ, xem [thang mức lỗi](qc_severity_road_v1.0.md) |
+| Đổi phiên bản | Đổi nghĩa một quy tắc thì tăng số phiên bản và ghi vào lịch sử dưới đây; bài đã gán theo bản cũ ghi rõ bản cũ |
+
+Lịch sử: v1.0 (Ngày 11, K5) bản đầu. Mẫu thẻ này lấy ý từ guideline gán nhãn công khai của các bộ dữ liệu xe tự hành (nuScenes, Zenseact ZOD): mỗi label có định nghĩa, quy tắc riêng và ví dụ ca khó.
+
 ## 1. Gán gì, vẽ hình gì, dạng gì
 
 | Label | Dạng trong CVAT | Vẽ cái gì trên ảnh | Thuộc tính |
@@ -86,6 +100,31 @@ Biển không chắc nhóm: chọn nhóm gần nhất theo chức năng, ghi và
 - [ ] Hộp đèn, biển sát và đủ thuộc tính.
 - [ ] Ảnh fisheye: theo cung, không gán thân xe.
 - [ ] Export CVAT for images 1.1 và mở lại được (`python -m road_lab.road_check lint <file>.zip`).
+- [ ] Tạo manifest bàn giao bằng `lint --manifest` với `--revision 1` (lần đầu) hoặc `2` (sau Rework); giữ tên zip, giữ manifest của lần trước.
+
+## 6. Liên hệ thực tế (đọc thêm, không đổi quy tắc ở trên)
+
+Phần này nối guideline với tài liệu ngoài để bạn biết các quy tắc trên đến từ đâu. Nó không thêm quy tắc chấm mới. Khóa học không tuyên bố bài lab tuân thủ ISO, QCVN hay chuẩn doanh nghiệp nào; mỗi dự án thật có guideline, ngưỡng và thang mức lỗi riêng.
+
+**Vạch kẻ đường Việt Nam (QCVN 41:2024/BGTVT, Phụ lục G).** Ảnh của lab là ảnh Mỹ, nhưng quy ước màu giống nhau:
+
+| Nhóm vạch QCVN | Ví dụ | Màu | Ứng với thuộc tính `lane` |
+| --- | --- | --- | --- |
+| 1.x phân chia hai chiều xe chạy (tim đường) | 1.1 đứt, 1.2 liền, 1.3 đôi liền | vàng | color yellow; 1.3 là kind double |
+| 2.x phân chia các làn cùng chiều | 2.1 đứt, 2.2 liền | trắng | color white |
+| 3.1 mép ngoài phần đường xe chạy | | trắng | lane (position theo làn), không phải road_curb |
+
+Vạch đôi một liền một đứt (QCVN 1.4) không có giá trị style riêng trong Road v1.0: ghi vào bảng ca khó, nêu nửa nào bạn chọn.
+
+**Tag ảnh và điều kiện vận hành (ODD).** Tag `timeofday` và `weather` là hai yếu tố trong nhóm điều kiện môi trường của ISO 34503 (chiếu sáng; thời tiết; sương, bụi). Nhờ tag, người làm dữ liệu đếm được bộ ảnh có đủ ca đêm, ca mưa hay chưa. Gán sai tag (ví dụ ảnh trời khô gán rain) là một ví dụ lỗi nhãn mà ISO/PAS 8800 (Điều 11) nêu cho dữ liệu AI trên ô tô.
+
+**Loại lỗi trên Phiếu QC 1.** ISO/IEC 5259-4 (mục 8.4.2) chia lỗi gán nhãn thành ba loại: bỏ sót (thiếu nhãn phải có), thừa (gán cái không phải đối tượng), sai phạm vi (hình lệch, dừng sớm, tràn vùng). Cột "Loại lỗi" trên phiếu dùng ba loại này, thêm "sai thuộc tính" và "lỗi file" của khóa học.
+
+**Quy trình kiểm.** Chu trình của lab (tự kiểm → bạn khác kiểm → Release / Hold / Rework → sửa và nộp lại) giống mô tả ở ISO/IEC 5259-4 mục 8.4.7–8.4.9: người gán tự kiểm, người kiểm soát lô, lô lỗi được trả về sửa, và bản gốc lẫn bản sửa đều được giữ kèm thời điểm và người sửa. Vì vậy lần nộp lại có manifest mới với `revision` tăng lên và mã `sha256` của từng file, còn manifest lần trước được giữ lại.
+
+**Mức lỗi và ngưỡng.** Ba mức nặng / chính / nhẹ và ngưỡng 5 % lỗi chính là luật của Phiếu QC 1 trong khóa này, không phải chuẩn ngành. Các ngày lab khác dùng thang và ngưỡng khác (Ngày 9 dùng mã E/W). ISO/IEC 5259-4 cũng không đặt ngưỡng lỗi: con số 5–10 % trong mục 8.4.8 là tỉ lệ lấy mẫu để kiểm cho việc nội bộ rủi ro thấp, không phải ngưỡng đạt. Khóa học dựng thang từ cách chia lớp lỗi của ISO 2859-1, xem [thang mức lỗi](qc_severity_road_v1.0.md).
+
+**Đo chất lượng nhãn.** ISO/IEC 5259-2 đặt tên cho các phép đo mà road_check tính gần đúng: độ chính xác nhãn (Acc-ML-7, tỉ lệ nhãn đúng), độ đầy đủ nhãn (Com-ML-5, tỉ lệ mẫu không thiếu nhãn), độ nhất quán nhãn (Con-ML-2, hai người gán cùng mục có cùng nhãn không). Tên gọi chỉ để bạn đọc tài liệu ngành; điểm của lab vẫn tính theo rubric.
 
 ---
 AI20K · AI in Action · VinUni. Dữ liệu BDD100K © 2018 The Regents of the University of California, theo BDD100K License.

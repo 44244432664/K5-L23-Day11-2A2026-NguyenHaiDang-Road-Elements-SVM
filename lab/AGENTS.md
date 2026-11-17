@@ -88,7 +88,7 @@ python -m road_lab.bdd_to_cvat_road --labels <...>.json [...] --manifest manifes
 ### 3.3 `road_check` — checker [guide] (cách đo: [LC])
 
 ```
-python -m road_lab.road_check lint FILE.zip [...]                                   # học viên tự kiểm, không cần GT
+python -m road_lab.road_check lint FILE.zip [...] [--manifest NAME-manifest.json --name NAME --revision N]  # học viên tự kiểm, không cần GT
 python -m road_lab.road_check check --gt GT_FRONT GT_FISHEYE --sub NAME-front.zip NAME-fisheye.zip \
     --name NAME [--json out/NAME.json] [--qc1-md out/NAME-auto-qc1.md]
 python -m road_lab.road_check batch --gt GT_FRONT GT_FISHEYE --submissions submissions/ --out out/
@@ -118,7 +118,7 @@ python -m road_lab.road_check selftest [--gt GT_FRONT GT_FISHEYE]               
 - **Định dạng (QC1-12):**
   - File không mở được, hoặc thiếu một trong hai file: lỗi nặng.
   - Label hay giá trị sai tên, hoặc ảnh lạ: lỗi nhẹ.
-- **Lỗi nặng** (đúng như phiếu):
+- **Lỗi nặng** (đúng như phiếu; tiêu chí xếp mức ở `docs/qc_severity_road_v1.0.md` [LC]):
   - thiếu hoặc sai tag camera;
   - thiếu L1/R1;
   - sai `position`;
@@ -129,6 +129,7 @@ python -m road_lab.road_check selftest [--gt GT_FRONT GT_FISHEYE]               
   - JSON gồm `attempted_core`, `missing_core`, `checked_labels`, `checked_by_code`, số lỗi theo mức, `major_rate`, `decision_auto`, `auto_score/auto_max`, các dòng `rubric`, `findings`.
   - Phiếu QC 1 tự động (markdown, cùng mẫu với `templates/qc1_form.md`).
   - Lệnh `batch` ghi thêm `scores.csv`.
+  - `lint --manifest` ghi manifest bàn giao JSON (`manifest: road-delivery/1`): định dạng, guideline, tên, `revision`, thời điểm UTC; mỗi file có `sha256`, số byte, `contains_images`, số ảnh, số ảnh đủ bốn tag, số ảnh chưa gán, số hình theo label; số cảnh báo lint theo mức. Manifest không chấm điểm và không kết luận chất lượng. Đặc tả: `docs/delivery_road_v1.0.md`. [LC]
 - **Quyết định tự động:**
   - Có lỗi nặng → Rework.
   - Tỉ lệ lỗi chính trên số nhãn GT đã kiểm > 5 % → Rework.

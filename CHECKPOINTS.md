@@ -20,6 +20,6 @@ Gặp lỗi ở đây thì sửa ngay, đừng để lặp ra 11 ảnh sau.
 
 **Task 3 — Phiếu QC 1.** Đủ 12 mã, mỗi mã có số mục đã kiểm. Mỗi lỗi ghi mã, ảnh, nhãn và mức. Tỉ lệ lỗi chính chia cho số nhãn đã kiểm, không chia cho số ảnh. Quyết định theo luật: còn lỗi nặng → Rework; tỉ lệ lỗi chính > 5 % → Rework; Hold chỉ khi còn ca mơ hồ mà lead chưa trả lời.
 
-**Export.** Format là CVAT for images 1.1, không phải COCO. `road_check lint` không còn lỗi nặng. Tên file là `<tên>-front.zip` và `<tên>-fisheye.zip`. Job ở trạng thái completed.
+**Export.** Format là CVAT for images 1.1, không phải COCO. `road_check lint` không còn lỗi nặng. Tên file là `<tên>-front.zip` và `<tên>-fisheye.zip`. Job ở trạng thái completed. Đã tạo `<tên>-manifest.json` bằng `lint --manifest`, `contains_images` là `false`.
 
 **Buffer.** Học viên sửa theo phiếu nhận được rồi export lại. Hoạt động row-anchor là tùy chọn, không chấm điểm.

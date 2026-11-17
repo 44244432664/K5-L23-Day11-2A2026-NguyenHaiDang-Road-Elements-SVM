@@ -13,12 +13,14 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import json
 import math
 import sys
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass, field
-from datetime import date
+import zipfile
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 from . import geometry as geo
@@ -69,6 +71,15 @@ CODE_LEVEL = {
     "QC1-01": "nặng", "QC1-02": "nặng", "QC1-03": "nặng", "QC1-04": "chính", "QC1-05": "chính",
     "QC1-06": "chính", "QC1-07": "chính", "QC1-08": "nặng / chính", "QC1-09": "chính",
     "QC1-10": "chính", "QC1-11": "chính", "QC1-12": "nhẹ / nặng",
+}
+# Error type per code. Missed / extra / extent follow the three annotation error kinds named in
+# ISO/IEC 5259-4 8.4.2 (under-detection, over-detection, range); "attribute" and "file" are course additions.
+CODE_KIND = {
+    "QC1-01": "sai thuộc tính / bỏ sót", "QC1-02": "bỏ sót", "QC1-03": "sai thuộc tính / thừa",
+    "QC1-04": "sai phạm vi / bỏ sót", "QC1-05": "sai phạm vi / sai thuộc tính", "QC1-06": "sai thuộc tính",
+    "QC1-07": "sai phạm vi / bỏ sót / thừa", "QC1-08": "bỏ sót / sai phạm vi / sai thuộc tính",
+    "QC1-09": "sai thuộc tính", "QC1-10": "bỏ sót / sai phạm vi", "QC1-11": "sai phạm vi / sai thuộc tính",
+    "QC1-12": "lỗi file",
 }
 SEV_VI = {"critical": "nặng", "major": "chính", "minor": "nhẹ"}
 
@@ -585,9 +596,9 @@ def qc1_markdown(res: Result, checker: str = "road_check (tự động)") -> str
     ]
     if res.missing:
         lines += [f"Ảnh bắt buộc chưa làm (không tính vào tỉ lệ): {', '.join(res.missing)}", ""]
-    lines += ["## Tổng hợp theo mã", "", "| Mã | Số mục kiểm | Số lỗi | Mức |", "| --- | ---: | ---: | --- |"]
+    lines += ["## Tổng hợp theo mã", "", "| Mã | Loại lỗi | Số mục kiểm | Số lỗi | Mức |", "| --- | --- | ---: | ---: | --- |"]
     for code, title in CODE_TITLES.items():
-        lines.append(f"| {code} {title} | {res.checked.get(code, 0)} | {by_code.get(code, 0)} | {CODE_LEVEL[code]} |")
+        lines.append(f"| {code} {title} | {CODE_KIND[code]} | {res.checked.get(code, 0)} | {by_code.get(code, 0)} | {CODE_LEVEL[code]} |")
     lines += ["", "## Danh sách lỗi (mỗi lỗi một dòng)", "", "| # | Mã | Ảnh | Nhãn (label, id) | Mức | Mô tả ngắn |", "| --- | --- | --- | --- | --- | --- |"]
     for i, f in enumerate(sorted(res.findings, key=lambda f: (f.image, f.code, f.ref)), 1):
         lines.append(f"| {i} | {f.code} | {f.image} | {f.ref} | {SEV_VI[f.severity]} | {f.message.replace('|', '/')} |")
@@ -805,6 +816,49 @@ def selftest(gt_images: list[Image], out=sys.stdout) -> bool:
     return ok and exact
 
 
+# --------------------------------------------------------------------------- delivery manifest
+IMAGE_SUFFIXES = (".jpg", ".jpeg", ".png", ".bmp", ".webp")
+
+
+def _file_entry(path: Path) -> dict:
+    data = path.read_bytes()
+    entry: dict = {"file": path.name, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+    if zipfile.is_zipfile(path):
+        with zipfile.ZipFile(path) as zf:
+            entry["contains_images"] = any(n.lower().endswith(IMAGE_SUFFIXES) for n in zf.namelist())
+    else:
+        entry["contains_images"] = False
+    try:
+        images = load(path)
+    except (CvatFormatError, OSError, ValueError) as exc:
+        entry["error"] = str(exc)
+        return entry
+    shapes = Counter(s.label for im in images for s in im.shapes)
+    entry |= {
+        "images": len(images),
+        "images_unlabelled": sum(1 for im in images if not im.shapes and not im.tags),
+        "images_all_tags": sum(1 for im in images if all(im.tag_value(t) is not None for t in TAG_LABELS)),
+        "shapes_by_label": dict(sorted(shapes.items())),
+    }
+    return entry
+
+
+def delivery_manifest(paths: list[str], findings: list[Finding], name: str, revision: int) -> dict:
+    """Describe one delivery: what was sent, its checksums, and the lint result at send time."""
+    sev = Counter(f.severity for f in findings)
+    return {
+        "manifest": "road-delivery/1",
+        "format": "CVAT for images 1.1",
+        "guideline": GUIDELINE_VERSION,
+        "name": name,
+        "revision": revision,
+        "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "files": [_file_entry(Path(p)) for p in paths],
+        "lint": {SEV_VI[k]: sev.get(k, 0) for k in ("critical", "major", "minor")},
+        "note": "Tạo bởi road_check lint. Mô tả file đã gửi, không phải kết luận chất lượng.",
+    }
+
+
 # --------------------------------------------------------------------------- CLI
 def _write_outputs(res: Result, json_path: str | None, md_path: str | None) -> None:
     if json_path:
@@ -820,6 +874,9 @@ def main(argv: list[str] | None = None) -> int:
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("lint", help="tự kiểm file export (không cần GT)")
     p.add_argument("files", nargs="+")
+    p.add_argument("--manifest", help="ghi manifest bàn giao (JSON) vào đường dẫn này")
+    p.add_argument("--name", default="learner", help="tên người nộp ghi trong manifest")
+    p.add_argument("--revision", type=int, default=1, help="lần nộp: 1 là lần đầu, 2 là sau Rework")
     p = sp.add_parser("check", help="so một học viên với GT")
     p.add_argument("--gt", nargs="+", required=True)
     p.add_argument("--sub", nargs="+", required=True)
@@ -843,6 +900,23 @@ def main(argv: list[str] | None = None) -> int:
         for f in findings:
             print(f"[{f.code} {SEV_VI[f.severity]}] {f.image} {f.ref}: {f.message}")
         print(f"\n{len(images)} ảnh, {len(findings)} cảnh báo. Lint chỉ là gợi ý; GT và người kiểm mới quyết định lỗi.")
+        if a.manifest:
+            if a.revision < 1:
+                print("--revision phải từ 1 trở lên", file=sys.stderr)
+                return 2
+            if errors:
+                print("Không tạo manifest: còn file không mở được. Sửa file rồi chạy lại.", file=sys.stderr)
+                return 1
+            dest = Path(a.manifest)
+            if dest.exists() and any(dest.samefile(f) for f in a.files):
+                print("--manifest trùng với một file nhãn; chọn tên khác (ví dụ <tên>-manifest.json)", file=sys.stderr)
+                return 2
+            m = delivery_manifest(a.files, findings, a.name, a.revision)
+            Path(a.manifest).parent.mkdir(parents=True, exist_ok=True)
+            Path(a.manifest).write_text(json.dumps(m, ensure_ascii=False, indent=2), encoding="utf-8")
+            print(f"Manifest bàn giao → {a.manifest}")
+            if any(f.get("contains_images") for f in m["files"]):
+                print("Cảnh báo: zip có kèm ảnh. Export lại, bỏ chọn Save images.")
         return 1 if errors else 0
 
     if a.cmd == "check":

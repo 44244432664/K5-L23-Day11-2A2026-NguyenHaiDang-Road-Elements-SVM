@@ -31,6 +31,8 @@ uv run --with pytest==8.3.4 pytest -q
 ## Tài liệu
 
 - [Guideline Road v1.0](docs/guideline_road_v1.0.md): đọc trước buổi, ít nhất là bảng label và quy tắc làn.
+- [Đặc tả bàn giao](docs/delivery_road_v1.0.md): định dạng file nộp, manifest, nộp lại sau Rework.
+- [Thang mức lỗi QC 1](docs/qc_severity_road_v1.0.md): tiêu chí nặng / chính / nhẹ và nguồn tham khảo.
 - [Mẫu Phiếu QC 1](templates/qc1_form.md) và [mẫu báo cáo](templates/report.md).
 - [Rubric](RUBRIC.md), [checkpoint](CHECKPOINTS.md), [nộp bài](SUBMISSION.md).
 - [`lab/AGENTS.md`](lab/AGENTS.md): bản máy đọc của guideline, mô tả input/output của script.
