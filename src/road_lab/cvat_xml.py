@@ -24,11 +24,16 @@ class Shape:
     points: list[Point]
     attributes: dict[str, str] = field(default_factory=dict)
     occluded: bool = False
-    index: int = 0  # order inside its image (stable id for reports)
+    index: int = 0  # order inside its image file; CVAT may reorder shapes on re-import
 
     @property
     def ref(self) -> str:
-        return f"{self.label}#{self.index}"
+        """Report id: label#order plus the first point, so a learner can find the shape on CVAT
+        even when a re-imported task lists shapes in another order."""
+        if not self.points:
+            return f"{self.label}#{self.index}"
+        x, y = self.points[0]
+        return f"{self.label}#{self.index}@({x:.0f},{y:.0f})"
 
     def copy(self) -> "Shape":
         return Shape(self.label, self.kind, list(self.points), dict(self.attributes), self.occluded, self.index)

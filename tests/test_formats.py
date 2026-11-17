@@ -81,3 +81,13 @@ def test_bezier_passes_through_ends():
     pts = geo.sample_bezier([(0.0, 0.0), (10.0, 20.0), (30.0, 20.0), (40.0, 0.0)], "LCCL")
     assert pts[0] == (0.0, 0.0) and pts[-1] == (40.0, 0.0)
     assert len(pts) > 4
+
+
+def test_shape_ref_carries_first_point_so_reordered_shapes_stay_findable():
+    img = synthetic_gt()[0]
+    lane = next(s for s in img.shapes if s.label == "lane")
+    x, y = lane.points[0]
+    assert lane.ref == f"lane#{lane.index}@({x:.0f},{y:.0f})"
+    moved = lane.copy()
+    moved.index = 7  # CVAT re-import can list the same shape at another position
+    assert moved.ref.endswith(f"@({x:.0f},{y:.0f})")
