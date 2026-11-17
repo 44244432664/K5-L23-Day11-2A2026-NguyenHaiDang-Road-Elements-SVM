@@ -22,7 +22,7 @@ Vào **Projects**, mở project `d11-road-<tên>`. Kiểm tra project có đủ 
 
 Dùng công cụ Tag ở thanh bên trái. Đặt **camera** trước, sau đó **timeofday**, **weather**, **source**. Trong bảng Objects, mở **Details** của từng tag để kiểm giá trị.
 
-![Bốn tag và giá trị](images/huong-dan-cvat/04-tags.jpg)
+![Bốn tag và giá trị](images/huong-dan-cvat/04-bon-nhan-anh.jpg)
 
 - Ảnh demo mang `camera=front`, `timeofday=day`, `weather=clear`, `source=simulated`, vì nó là ảnh tổng hợp. Với ảnh lớp, chọn `source` đúng theo nguồn gốc của ảnh đó.
 - CVAT tự điền giá trị đầu tiên của danh sách, ví dụ `weather=clear`. Lint không bắt được tag sai nếu giá trị đó vẫn hợp lệ, nên phải tự kiểm từng tag.
