@@ -25,7 +25,7 @@ Nguồn sự thật duy nhất là `src/road_lab/taxonomy.py`. Từ nó, `python
 | `traffic_sign` | rectangle | `group` prohibitory/mandatory/warning/information/supplementary/other · `facing` front/side/back · `edge_zone` checkbox |
 | `camera` (tag) | tag | `value` front/fisheye_front/fisheye_rear/fisheye_left/fisheye_right |
 | `timeofday` (tag) | tag | `value` day/dusk/night |
-| `weather` (tag) | tag | `value` clear/rain/fog/other |
+| `weather` (tag) | tag | `value` clear/overcast/rain/fog/other |
 | `source` (tag) | tag | `value` real/simulated |
 
 **Cách đặt tag (guide yêu cầu ghi ở đây):** mỗi tag là một label kiểu Tag có **một** thuộc tính select tên `value`; ví dụ label `camera` với `value = fisheye_left`. Không dùng phương án "một label tag riêng cho mỗi giá trị". Lý do: export CVAT for images 1.1 ghi `<tag label="camera"><attribute name="value">…</attribute></tag>`, nên một ảnh không thể có cùng lúc hai giá trị camera, và checker đọc được một cách duy nhất. [LC]
@@ -76,7 +76,7 @@ python -m road_lab.bdd_to_cvat_road --labels <...>.json [...] --manifest manifes
   | --- | --- |
   | `camera` | `front` |
   | `timeofday` | daytime→day, dawn/dusk→dusk, night→night |
-  | `weather` | clear/partly cloudy/overcast→clear, rainy→rain, foggy→fog, còn lại→other |
+  | `weather` | clear/partly cloudy→clear, overcast→overcast, rainy→rain, foggy→fog, còn lại→other |
   | `source` | `real` |
 
 - **Để trống cho coach:**

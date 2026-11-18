@@ -127,3 +127,9 @@ def test_rowanchor(tmp_path, capsys):
     out = capsys.readouterr().out
     assert "không có làn" in out and "640.0" in out
     assert rowanchor.main([str(p), "--image", "A01", "--position", "L1"]) == 1
+
+
+def test_weather_mapping_keeps_overcast_separate():
+    # Overcast but dry sky is its own tag value, not folded into clear.
+    assert conv.WEATHER["overcast"] == "overcast"
+    assert conv.WEATHER["partly cloudy"] == "clear"

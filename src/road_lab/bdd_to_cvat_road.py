@@ -13,7 +13,7 @@ What is converted (taxonomy Road v1.0):
   * traffic light / sign boxes from 8 px tall -> ``traffic_light`` / ``traffic_sign``; light color
     from trafficLightColor (none -> off is NOT assumed: left empty); type, facing, group left empty.
   * tags: camera=front, timeofday (daytime->day, dawn/dusk->dusk, night->night), weather
-    (clear/partly cloudy/overcast->clear, rainy->rain, foggy->fog, else other), source=real.
+    (clear/partly cloudy->clear, overcast->overcast, rainy->rain, foggy->fog, else other), source=real.
 
 Image names become ``{slot}_{bdd name}`` to match the class image pack. Every empty attribute is
 listed in ``<out>_todo.csv``; the draft is not GT until the coach has filled and reviewed it.
@@ -34,7 +34,7 @@ from .cvat_xml import Image, Shape, Tag, write
 from .taxonomy import CORE_FRONT, TAG_ATTRIBUTE
 
 TIMEOFDAY = {"daytime": "day", "dawn/dusk": "dusk", "night": "night"}
-WEATHER = {"clear": "clear", "partly cloudy": "clear", "overcast": "clear", "rainy": "rain", "foggy": "fog"}
+WEATHER = {"clear": "clear", "partly cloudy": "clear", "overcast": "overcast", "rainy": "rain", "foggy": "fog"}
 LIGHT_COLOR = {"red": "red", "yellow": "yellow", "green": "green"}
 MIN_BOX_PX = 8.0
 BDD_W, BDD_H = 1280, 720

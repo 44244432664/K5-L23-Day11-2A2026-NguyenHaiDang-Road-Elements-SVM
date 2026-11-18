@@ -25,10 +25,10 @@ Lịch sử: v1.0 (Ngày 11, K5) bản đầu. Mẫu thẻ này lấy ý từ gu
 | `lane` | polyline (đường gấp khúc, hở) | Một vạch kẻ làn: nối các điểm nằm trên tâm vệt sơn, từ gần xe ra xa | position L1, R1, L2, R2, other · style solid, dashed · color white, yellow, other · kind single, double |
 | `road_curb` | polyline | Mép đường là vỉa hè hoặc lề, nơi không có vạch sơn | không có |
 | `crosswalk` | polygon (vùng kín) | Cả vùng vạch ngựa vạn, một polygon bao các vạch | không có |
-| `drivable` | polygon | Phần mặt đường xe đi được nếu đường trống | area_type direct (làn đang đi), alternative (làn cùng chiều bên cạnh) |
+| `drivable` | polygon | Phần mặt đường xe đi được nếu đường trống | area_type direct (làn đang đi, không gồm dải đỗ xe sát lề), alternative (làn cùng chiều bên cạnh) |
 | `traffic_light` | rectangle (hộp chữ nhật) | Cả vỏ cụm đèn, hộp sát mép | color red, yellow, green, off, unknown · type vehicle, pedestrian, beacon · facing front, side, back · edge_zone (ô tick) |
 | `traffic_sign` | rectangle | Cả tấm biển, hộp sát mép (biển phụ có hộp riêng) | group prohibitory, mandatory, warning, information, supplementary, other · facing front, side, back · edge_zone |
-| Tag ảnh | tag (nhãn cho cả ảnh, không vẽ hình) | Gắn cho mỗi ảnh một lần | camera front, fisheye_front, fisheye_rear, fisheye_left, fisheye_right · timeofday day, dusk, night · weather clear, rain, fog, other · source real, simulated |
+| Tag ảnh | tag (nhãn cho cả ảnh, không vẽ hình) | Gắn cho mỗi ảnh một lần | camera front, fisheye_front, fisheye_rear, fisheye_left, fisheye_right · timeofday day, dusk, night · weather clear, overcast, rain, fog, other · source real, simulated |
 
 Cờ occluded có sẵn trong CVAT: bật cho đoạn polyline bạn nối qua chỗ bị che.
 
@@ -59,7 +59,13 @@ Mỗi ảnh chỉ yêu cầu nhóm label ghi ở bảng kế hoạch ảnh (slid
 
 ### Vùng lái (drivable)
 
-Gán theo "đi được nếu đường trống", không khoét lỗ quanh xe khác. Không gồm lề, vỉa hè, thân xe mình, vùng phía sau cọc.
+Gán theo "đi được nếu đường trống", không khoét lỗ quanh xe khác. Không gồm lề, vỉa hè, thân xe mình, vùng phía sau cọc. Dải đỗ xe sát lề cũng không tính vào `direct`: đó là vùng có chức năng khác (dừng, đỗ), không phải làn đang đi, kể cả khi lúc chụp không có xe đỗ.
+
+### Tag weather
+
+- `clear`: trời quang hoặc ít mây, mặt đường khô.
+- `overcast`: trời âm u, nhiều mây nhưng khô, không mưa, không sương.
+- `rain`: đang mưa hoặc mặt đường ướt rõ do mưa. `fog`: sương mù, khói bụi làm giảm tầm nhìn. `other`: tuyết hoặc trường hợp không xếp được, ghi vào bảng ca khó.
 
 ### Đèn và biển
 

@@ -221,6 +221,7 @@
         "default_value": "clear",
         "values": [
           "clear",
+          "overcast",
           "rain",
           "fog",
           "other"

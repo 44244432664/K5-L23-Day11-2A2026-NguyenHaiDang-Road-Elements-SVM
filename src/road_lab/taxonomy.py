@@ -62,7 +62,7 @@ TAG_ATTRIBUTE = "value"
 TAG_LABELS: dict[str, list[str]] = {
     "camera": ["front", "fisheye_front", "fisheye_rear", "fisheye_left", "fisheye_right"],
     "timeofday": ["day", "dusk", "night"],
-    "weather": ["clear", "rain", "fog", "other"],
+    "weather": ["clear", "overcast", "rain", "fog", "other"],
     "source": ["real", "simulated"],
 }
 TAG_COLORS = {"camera": "#7f7f7f", "timeofday": "#bcbd22", "weather": "#17becf", "source": "#8c564b"}
