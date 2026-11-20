@@ -1,0 +1,50 @@
+﻿image,code,severity,ref,message,disposition
+A01,QC1-12,minor,"drivable#4@(712,720)",2 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A01,QC1-12,minor,"drivable#6@(110,720)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A01,QC1-12,minor,"drivable#9@(0,599)",2 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A02,QC1-12,minor,"drivable#0@(425,720)",2 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A02,QC1-12,minor,"drivable#5@(0,587)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A02,QC1-02,critical,lane,chưa có R1 (bỏ qua nếu thật sự không thấy vạch),Position assumption accepted by user; raw warning retained; coach verdict pending.
+A02,QC1-05,major,lane,3 polyline cùng position L1: vạch đứt có bị tách không?,Position assumption / style-transition representation; no automatic duplicate-line defect.
+A03,QC1-02,critical,lane,chưa có R1 (bỏ qua nếu thật sự không thấy vạch),Position assumption accepted by user; raw warning retained; coach verdict pending.
+A03,QC1-05,major,lane,2 polyline cùng position L1: vạch đứt có bị tách không?,Position assumption / style-transition representation; no automatic duplicate-line defect.
+A04,QC1-04,major,"lane#2@(604,323)",điểm đầu cao hơn điểm cuối: có vẽ từ xa về gần không?,Confirmed direction issue in QC1.
+A04,QC1-05,major,lane,2 polyline cùng position R2: vạch đứt có bị tách không?,Paired double markings: two physical polylines accepted under coach rule; not a split-dash defect.
+A04,QC1-05,major,lane,4 polyline cùng position L1: vạch đứt có bị tách không?,Paired double markings: two physical polylines accepted under coach rule; not a split-dash defect.
+A05,QC1-12,minor,"road_curb#0@(914,346)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A05,QC1-02,critical,lane,chưa có L1 (bỏ qua nếu thật sự không thấy vạch),Visibility review: do not invent an unpainted boundary. Coach visibility exception still needs confirmation. A07 has a separate human finding for the unannotated actual R1.
+A05,QC1-02,critical,lane,chưa có R1 (bỏ qua nếu thật sự không thấy vạch),Visibility review: do not invent an unpainted boundary. Coach visibility exception still needs confirmation. A07 has a separate human finding for the unannotated actual R1.
+A06,QC1-12,minor,"road_curb#5@(679,409)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A06,QC1-12,minor,"drivable#9@(0,422)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A06,QC1-02,critical,lane,chưa có R1 (bỏ qua nếu thật sự không thấy vạch),Visibility review: do not invent an unpainted boundary. Coach visibility exception still needs confirmation. A07 has a separate human finding for the unannotated actual R1.
+A07,QC1-12,minor,"drivable#1@(0,532)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A07,QC1-02,critical,lane,chưa có L1 (bỏ qua nếu thật sự không thấy vạch),Visibility review: do not invent an unpainted boundary. Coach visibility exception still needs confirmation. A07 has a separate human finding for the unannotated actual R1.
+A07,QC1-05,major,lane,2 polyline cùng position R1: vạch đứt có bị tách không?,Confirmed remaining split-dashed-line finding in QC1.
+A08,QC1-12,minor,"drivable#33@(761,447)",4 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A08,QC1-12,minor,"drivable#34@(0,504)",4 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A08,QC1-05,major,lane,3 polyline cùng position L1: vạch đứt có bị tách không?,Position assumption / style-transition representation; no automatic duplicate-line defect.
+A08,QC1-08,minor,"traffic_light#22@(655,226)",box thấp hơn 8 px: không bắt buộc,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A09,QC1-12,minor,"road_curb#4@(1280,682)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A09,QC1-02,critical,lane,chưa có R1 (bỏ qua nếu thật sự không thấy vạch),Visibility review: do not invent an unpainted boundary. Coach visibility exception still needs confirmation. A07 has a separate human finding for the unannotated actual R1.
+A09,QC1-05,major,lane,2 polyline cùng position L2: vạch đứt có bị tách không?,Paired double markings: two physical polylines accepted under coach rule; not a split-dash defect.
+A10,QC1-02,critical,lane,chưa có R1 (bỏ qua nếu thật sự không thấy vạch),Visibility review: do not invent an unpainted boundary. Coach visibility exception still needs confirmation. A07 has a separate human finding for the unannotated actual R1.
+A10,QC1-10,minor,"traffic_sign#2@(440,232)",box thấp hơn 8 px: không bắt buộc,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A10,QC1-10,minor,"traffic_sign#4@(536,236)",box thấp hơn 8 px: không bắt buộc,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A10,QC1-10,minor,"traffic_sign#7@(423,192)",box thấp hơn 8 px: không bắt buộc,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A10,QC1-10,minor,"traffic_sign#14@(487,235)",box thấp hơn 8 px: không bắt buộc,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A11,QC1-12,minor,"drivable#1@(606,432)",2 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A11,QC1-05,major,lane,2 polyline cùng position L1: vạch đứt có bị tách không?,Paired double markings: two physical polylines accepted under coach rule; not a split-dash defect.
+A12,QC1-12,minor,"drivable#4@(0,538)",2 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A12,QC1-12,minor,"drivable#5@(0,538)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+A12,QC1-02,critical,lane,chưa có R1 (bỏ qua nếu thật sự không thấy vạch),Position assumption accepted by user; raw warning retained; coach verdict pending.
+A12,QC1-05,major,lane,5 polyline cùng position L1: vạch đứt có bị tách không?,Position assumption / style-transition representation; no automatic duplicate-line defect.
+B01,QC1-12,minor,"road_curb#1@(129,674)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+B01,QC1-12,minor,"road_curb#2@(1198,652)",1 điểm lặp liền nhau (click hai lần?): xoá điểm thừa,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+B03,QC1-11,major,"lane#8@(411,410)",chỉ 2 điểm: trên fisheye hãy đặt điểm theo cung,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+B03,QC1-11,major,"lane#9@(677,285)",chỉ 3 điểm: trên fisheye hãy đặt điểm theo cung,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+B03,QC1-11,major,"traffic_sign#1@(837,278)",gợi ý edge_zone = tắt (tâm box trong 80 % bán kính; tự kiểm lại),"Confirmed B03 edge_zone mismatch in QC1; use CVAT IDs #3084/#3085, not XML order."
+B03,QC1-11,major,"traffic_sign#5@(1131,362)",gợi ý edge_zone = bật (tâm box ngoài 80 % bán kính; tự kiểm lại),"Confirmed B03 edge_zone mismatch in QC1; use CVAT IDs #3084/#3085, not XML order."
+B05,QC1-11,major,"road_curb#3@(415,113)",chỉ 2 điểm: trên fisheye hãy đặt điểm theo cung,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+B07,QC1-11,major,"lane#0@(1119,243)",chỉ 3 điểm: trên fisheye hãy đặt điểm theo cung,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+B07,QC1-11,major,"lane#4@(138,693)",chỉ 3 điểm: trên fisheye hãy đặt điểm theo cung,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."
+B08,QC1-11,major,"lane#2@(216,621)",chỉ 3 điểm: trên fisheye hãy đặt điểm theo cung,"Advisory only: duplicate vertex, optional sub-8px box or sparse-vertex warning; not proof of a geometry defect."

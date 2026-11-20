@@ -1,0 +1,342 @@
+{
+  "decision": "Rework",
+  "counts": {
+    "critical": 1,
+    "major": 12,
+    "minor": 1
+  },
+  "checked_labels": 264,
+  "major_rate": 0.045454545454545456,
+  "assumptions": [
+    {
+      "code": "QC1-03",
+      "image": "A02",
+      "refs": "lane #3098",
+      "severity": "critical",
+      "message": "The outer left marking is labeled L1, duplicating the nearer left boundary #3099. Use L2 for this marking.",
+      "number": 1,
+      "previous_number": 25,
+      "disposition": "Accepted by user assumption pending coach; not counted as a defect."
+    },
+    {
+      "code": "QC1-03",
+      "image": "A02",
+      "refs": "lane #3100",
+      "severity": "critical",
+      "message": "The right boundary of the current lane is labeled L1. Set position=R1.",
+      "number": 2,
+      "previous_number": 26,
+      "disposition": "Accepted by user assumption pending coach; not counted as a defect."
+    },
+    {
+      "code": "QC1-03",
+      "image": "A03",
+      "refs": "lane #3105",
+      "severity": "critical",
+      "message": "The dashed boundary to the right of the current lane is labeled L1. Set position=R1.",
+      "number": 3,
+      "previous_number": 27,
+      "disposition": "Accepted by user assumption pending coach; not counted as a defect."
+    },
+    {
+      "code": "QC1-03",
+      "image": "A08",
+      "refs": "lane #3142",
+      "severity": "critical",
+      "message": "This short distant segment lies on the continuation of the right boundary #3140, but is labeled L1. Correct the position to R1; ask the lead how to represent the local style transition.",
+      "number": 5,
+      "previous_number": 31,
+      "disposition": "Accepted by user assumption pending coach; not counted as a defect."
+    },
+    {
+      "code": "QC1-03",
+      "image": "A12",
+      "refs": "lane #3213",
+      "severity": "critical",
+      "message": "The far-side boundary on the right of the current lane is labeled L1. Set position=R1.",
+      "number": 6,
+      "previous_number": 32,
+      "disposition": "Accepted by user assumption pending coach; not counted as a defect."
+    },
+    {
+      "code": "QC1-03",
+      "image": "A12",
+      "refs": "lane #3215",
+      "severity": "critical",
+      "message": "The outer left boundary is labeled L1, duplicating the nearer left boundary #3214. Assign its position relative to the current lane (L2 for the next boundary outside #3214).",
+      "number": 7,
+      "previous_number": 33,
+      "disposition": "Accepted by user assumption pending coach; not counted as a defect."
+    },
+    {
+      "code": "QC1-07",
+      "image": "A07",
+      "refs": "drivable #3138",
+      "severity": "major",
+      "message": "The direct polygon traces a rectangular cutout around the silver sedan, approximately x447Ă¢â‚¬â€œ674, y352Ă¢â‚¬â€œ414. Include the road footprint as if the other car were absent; do not trace its silhouette.",
+      "number": 18,
+      "previous_number": 49,
+      "disposition": "Car cutouts accepted by explicit user instruction; not counted as a defect."
+    },
+    {
+      "code": "QC1-07",
+      "image": "A10",
+      "refs": "drivable #3193",
+      "severity": "major",
+      "message": "The direct polygon still traces the lower outlines of the Subaru and right-side cars, creating silhouette cutouts. Continue the road footprint through other cars as if the road were empty. The coach clarification permits broader direct areas on unmarked accessible road; this finding does not require splitting the polygon merely because it is broad.",
+      "number": 19,
+      "previous_number": 50,
+      "disposition": "Car cutouts accepted by explicit user instruction; not counted as a defect."
+    },
+    {
+      "code": "QC1-07",
+      "image": "A11",
+      "refs": "drivable #3208",
+      "severity": "major",
+      "message": "The alternative polygon steps down around the visible SUVs, including the SUV near x671Ă¢â‚¬â€œ797. Include the drivable road footprint through vehicle occlusions instead of excluding each car.",
+      "number": 20,
+      "previous_number": 51,
+      "disposition": "Car cutouts accepted by explicit user instruction; not counted as a defect."
+    },
+    {
+      "code": "QC1-07",
+      "image": "B03",
+      "refs": "drivable #3019",
+      "severity": "major",
+      "message": "The direct polygon follows the lower outline of the silver car near the distant center (around x600Ă¢â‚¬â€œ675, y280Ă¢â‚¬â€œ306). Continue the road region as if the car were absent.",
+      "number": 21,
+      "previous_number": 53,
+      "disposition": "Car cutouts accepted by explicit user instruction; not counted as a defect."
+    },
+    {
+      "code": "QC1-07",
+      "image": "B03",
+      "refs": "drivable #3022",
+      "severity": "major",
+      "message": "The alternative polygon bends around the black car near the far end. Include the road footprint through the car rather than making a silhouette cutout.",
+      "number": 22,
+      "previous_number": 54,
+      "disposition": "Car cutouts accepted by explicit user instruction; not counted as a defect."
+    },
+    {
+      "code": "QC1-07",
+      "image": "B05",
+      "refs": "drivable #3032",
+      "severity": "major",
+      "message": "The drivable polygon bends around the black car at upper left. A moving/standing car is not a permanent road boundary; annotate the road if empty while retaining the true curb and own-vehicle exclusions.",
+      "number": 23,
+      "previous_number": 55,
+      "disposition": "Car cutouts accepted by explicit user instruction; not counted as a defect."
+    }
+  ],
+  "resolved_from_round2": [
+    {
+      "code": "QC1-03",
+      "image": "B08",
+      "refs": "lane #3078",
+      "severity": "critical",
+      "message": "Side-camera lane has position=R1. Road v1.0 requires position=other on every lane in fisheye_left/fisheye_right.",
+      "number": 8,
+      "previous_number": 36
+    },
+    {
+      "code": "QC1-09",
+      "image": "A03",
+      "refs": "traffic_sign #3222",
+      "severity": "major",
+      "message": "Orange diamond warning sign is grouped prohibitory. Use group=warning.",
+      "number": 24,
+      "previous_number": 56
+    },
+    {
+      "code": "QC1-09",
+      "image": "A06",
+      "refs": "traffic_sign #3127",
+      "severity": "major",
+      "message": "Orange diamond construction warning sign is grouped prohibitory. Use group=warning.",
+      "number": 25,
+      "previous_number": 57
+    },
+    {
+      "code": "QC1-09",
+      "image": "A06",
+      "refs": "traffic_sign #3128",
+      "severity": "major",
+      "message": "ONE WAY sign is grouped information. Road v1.0 explicitly assigns One Way to group=mandatory.",
+      "number": 26,
+      "previous_number": 58
+    },
+    {
+      "code": "QC1-09",
+      "image": "A10",
+      "refs": "traffic_sign #3196",
+      "severity": "major",
+      "message": "One tall box encloses the stack of separate parking/no-standing plates. Give each physical plate its own tight rectangle instead of enclosing the full stack in one box.",
+      "number": 28,
+      "previous_number": 60
+    },
+    {
+      "code": "QC1-11",
+      "image": "B02",
+      "refs": "traffic_light #3082",
+      "severity": "major",
+      "message": "edge_zone=false, but box center (134.2,165.0) is 597.4px from image center, outside the lab radius threshold 0.8 Ä‚â€” 640 = 512px. Set edge_zone=true under the repo convention.",
+      "number": 29,
+      "previous_number": 61
+    },
+    {
+      "code": "QC1-11",
+      "image": "B02",
+      "refs": "traffic_light #3083",
+      "severity": "major",
+      "message": "edge_zone=false, but box center (1109.2,119.6) is 593.5px from image center, outside the lab radius threshold 0.8 Ä‚â€” 640 = 512px. Set edge_zone=true under the repo convention.",
+      "number": 30,
+      "previous_number": 62
+    },
+    {
+      "code": "QC1-11",
+      "image": "B04",
+      "refs": "traffic_sign #3086",
+      "severity": "major",
+      "message": "edge_zone=false, but box center (1085.9,201.5) is 527.3px from image center, outside the lab radius threshold 0.8 Ä‚â€” 640 = 512px. Set edge_zone=true under the repo convention.",
+      "number": 32,
+      "previous_number": 64
+    },
+    {
+      "code": "QC1-04",
+      "image": "A07",
+      "refs": "lane #3137",
+      "severity": "major",
+      "previous_number": null,
+      "message": "The point order was reversed during rework: first (754,284), last (1191,450), so it now runs far to near. Reverse to near-to-far while correcting the outer marking.",
+      "number": 33
+    }
+  ],
+  "findings": [
+    {
+      "code": "QC1-02",
+      "image": "A07",
+      "refs": "lane #3136 / #3226; unannotated solid R1",
+      "severity": "critical",
+      "message": "Both current lane polylines trace the outer right-hand dashed marking. The prominent solid white boundary immediately right of the silver sedan, around (772,563) to (695,270), is still not annotated as lane. Add the actual solid R1; assign the outer dashed marking R2. The green drivable edge does not replace a lane polyline. Counted as one combined critical boundary finding.",
+      "number": 1,
+      "previous_number": 28
+    },
+    {
+      "code": "QC1-04",
+      "image": "A04",
+      "refs": "lane #3113",
+      "severity": "major",
+      "message": "Polyline runs from (604,323) to (718,536), far to near. Reverse its point order so the near endpoint comes first.",
+      "number": 2,
+      "previous_number": 38
+    },
+    {
+      "code": "QC1-04",
+      "image": "B03",
+      "refs": "lane #3016",
+      "severity": "major",
+      "message": "Polyline starts near the distant car at (677,285) and ends nearer the camera at (785,361). Reverse the point order.",
+      "number": 3,
+      "previous_number": 39
+    },
+    {
+      "code": "QC1-05",
+      "image": "A07",
+      "refs": "lane #3136 + #3226",
+      "severity": "major",
+      "message": "Two fragments still describe the same outer dashed marking. Join its visible fragments and gaps into one polyline, without merging physically separate lines of a double marking.",
+      "number": 4,
+      "previous_number": 40
+    },
+    {
+      "code": "QC1-06",
+      "image": "A02",
+      "refs": "lane #3098",
+      "severity": "major",
+      "message": "The outer-left marking has separated white dashes but style=solid. Use dashed.",
+      "number": 5,
+      "previous_number": 41
+    },
+    {
+      "code": "QC1-06",
+      "image": "A02",
+      "refs": "lane #3099",
+      "severity": "major",
+      "message": "The nearer-left marking has separated white dashes but style=solid. Use dashed.",
+      "number": 6,
+      "previous_number": 42
+    },
+    {
+      "code": "QC1-06",
+      "image": "A03",
+      "refs": "lane #3104",
+      "severity": "major",
+      "message": "The left boundary paint is yellow but color=white. Use yellow.",
+      "number": 7,
+      "previous_number": 43
+    },
+    {
+      "code": "QC1-06",
+      "image": "A03",
+      "refs": "lane #3105",
+      "severity": "major",
+      "message": "The right boundary consists of separated white dashes but style=solid. Use dashed.",
+      "number": 8,
+      "previous_number": 44
+    },
+    {
+      "code": "QC1-06",
+      "image": "A07",
+      "refs": "lane #3136 + #3226",
+      "severity": "major",
+      "message": "The outer marking is dashed, but both current fragments have style=solid. Use dashed. This is one physical-marking attribute finding.",
+      "number": 9,
+      "previous_number": 45
+    },
+    {
+      "code": "QC1-06",
+      "image": "A12",
+      "refs": "lane #3213",
+      "severity": "major",
+      "message": "The distant right boundary has separated white dashes but style=solid. Use dashed.",
+      "number": 10,
+      "previous_number": 47
+    },
+    {
+      "code": "QC1-09",
+      "image": "A10",
+      "refs": "traffic_sign #3202",
+      "severity": "major",
+      "message": "The ONE WAY arrow plate is grouped information. Use group=mandatory.",
+      "number": 11,
+      "previous_number": 59
+    },
+    {
+      "code": "QC1-11",
+      "image": "B03",
+      "refs": "traffic_sign #3084",
+      "severity": "major",
+      "message": "edge_zone=false, but box center (1144.2,379.4) is 514.7px from image center, outside the lab radius threshold 0.8 Ä‚â€” 640 = 512px. Set edge_zone=true under the repo convention.",
+      "number": 12,
+      "previous_number": 63
+    },
+    {
+      "code": "QC1-01",
+      "image": "A10",
+      "refs": "weather tag",
+      "severity": "minor",
+      "previous_number": null,
+      "message": "The tag is now present but saved as overcast. Road v1.0 weather=rain includes visibly wet pavement from rain, which this image shows. Set rain. This non-camera metadata issue is recorded as minor in this peer review.",
+      "number": 13
+    },
+    {
+      "code": "QC1-11",
+      "image": "B03",
+      "refs": "traffic_sign #3085",
+      "severity": "major",
+      "message": "edge_zone was enabled on the central blue sign instead of the peripheral sign #3084. Its box center is inside the 512px radius, so #3085 should have edge_zone=false; #3084 should have true.",
+      "number": 14
+    }
+  ]
+}
