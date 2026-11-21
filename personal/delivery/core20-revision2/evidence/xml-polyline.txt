@@ -1,6 +1,0 @@
-<polyline label="lane" source="manual" occluded="0" points="109.63,720.00;361.24,507.91" z_order="0">
-      <attribute name="position">L1</attribute>
-      <attribute name="style">dashed</attribute>
-      <attribute name="color">white</attribute>
-      <attribute name="kind">single</attribute>
-    </polyline>
