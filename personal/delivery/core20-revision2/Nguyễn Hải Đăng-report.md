@@ -37,7 +37,7 @@ Tổng core: **20 ảnh, 184 shapes, 80 tags**. Không dùng số đếm của e
 
 ## 4. Phiếu QC 1 nhận được
 
-Người kiểm: **Codex, vai trò peer AI**. Quyết định hiện tại: **Rework**. Xem [Phiếu QC1 đã điền](codex-qc1-for-nguyenhaidang.md).
+Người kiểm: **Nguyễn Gia Huy**. Quyết định hiện tại: **Rework**. Xem [Phiếu QC1 tổng hợp](nguyengiahuy-qc1-for-nguyenhaidang.md): **1 lỗi nặng, 12 lỗi chính / 264 nhãn = 4.55%, 1 lỗi nhẹ**. Phiếu gồm kết quả hiện hành và hai vòng kiểm cũ trong phụ lục; không cộng dồn số lỗi giữa các vòng.
 
 | Mã lỗi / nhóm | Số lỗi còn | Đồng ý / xử lý | Đã sửa? |
 | --- | ---: | --- | --- |
@@ -53,6 +53,14 @@ Người kiểm: **Codex, vai trò peer AI**. Quyết định hiện tại: **Re
 | Thiếu tag, B05/B07/B08 position, sign nhóm đã sửa, B02/B04 edge_zone | 0 còn trong các mục đã khắc phục | Đối chiếu với snapshot mới | Đã sửa bởi học viên |
 
 A10: đã tách cụm biển thành #3196/#3227/#3228; #3203 đã đổi mandatory nhưng ONE WAY #3202 còn information. B03: #3085 được bật edge_zone, trong khi #3084 ngoài rìa còn false; cần đổi #3084=true và #3085=false.
+
+### Phiếu QC1 đã thực hiện cho bạn
+
+Tôi kiểm lô của **Nguyễn Gia Huy**, ghi trong [nguyenhaidang-qc1-for-nguyengiahuy.md](nguyenhaidang-qc1-for-nguyengiahuy.md). Mẫu gồm A04, A08, B02, B03, B04 và B06: **6 ảnh, 114 nhãn = 90 shape + 24 tag**. Phiếu ghi nhận không còn lỗi xác nhận trong mẫu sau sửa, với 10 mục cũ được giữ để truy vết. Quyết định của phiếu là **Hold**, chờ coach xác nhận ngoại lệ vạch không nhìn thấy và quy ước L/R cho camera sau.
+
+Hai mục lịch sử về vạch đôi A04 dùng cách biểu diễn một polyline, khác với chỉ dẫn hai polyline theo hai vệt sơn được áp dụng trong phiếu nhận được. Đã ghi rõ điểm cần đối chiếu trong phiếu kiểm cho bạn; không suy ra Release hoặc tự thay đổi số lỗi khi chưa kiểm lại dữ liệu của bạn.
+
+Phiếu tôi viết cho bạn là file QC thuộc bộ 5 file nộp theo SUBMISSION.md. Phiếu Nguyễn Gia Huy viết cho tôi là tài liệu phản hồi bổ sung trong gói lưu hồ sơ.
 
 ## 5. Kiểm file export
 
